@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon --watch ./src ./src/controllers/cardsout.ts"
+    "start": "npx nodemon --watch ./src ./src/controllers/user_verification.ts"
   },
   "keywords": [],
   "author": "",

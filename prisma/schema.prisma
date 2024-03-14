@@ -11,19 +11,7 @@ datasource db {
 }
 
 
-model User {
-  id Int @id @default(autoincrement())
-  email String @unique
-  password_user String
-  first_name String
-  last_name String
-  phone String @unique 
-  address String
-  country String
-  admin Boolean @default(false)
-  vehicles Vehicles[]
-  booking Booking[]
-}
+
 
 model Vehicles {
   id Int @id @default(autoincrement())
@@ -40,13 +28,16 @@ model Vehicles {
   categoryId Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userid User @relation(fields: [authorId], references: [id])
-  authorId Int
   booking Booking[]
 }
 
 model Booking {
   id Int @id @default(autoincrement())
+  full_name String
+  email String @unique
+  country String
+  id_passport String
+  phone_number String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   date_in String
@@ -55,11 +46,9 @@ model Booking {
   airline String
   hour_in String
   hour_out String
-  no_flight String
+  no_flight String 
   vehicles Vehicles @relation(fields: [id_vehicles], references: [id])
   id_vehicles Int
-  User User @relation(fields: [id_user], references: [id])
-  id_user Int
 }
 
 model Category {

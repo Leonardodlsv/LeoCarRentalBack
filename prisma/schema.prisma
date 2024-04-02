@@ -36,7 +36,7 @@ model Booking {
   full_name String
   email String @unique
   country String
-  id_passport String
+  id_passport String @unique
   phone_number String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -49,6 +49,7 @@ model Booking {
   no_flight String 
   vehicles Vehicles @relation(fields: [id_vehicles], references: [id])
   id_vehicles Int
+  
 }
 
 model Category {

@@ -21,9 +21,17 @@ interface BookingRequestBody {
 
 
 export const getBooking = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const booking = await prismaClient.booking.findUnique({ where: { id: +id } });
+  try {
+    const  id_passport  = req.params.id_passport;
+    const booking = await prismaClient.booking.findUnique({
+        where: { id_passport: String(id_passport) },
+        include: { vehicles: true }
+    });
     res.status(200).json(booking);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Error al obtener la reserva.' });
+  }
 };
 
 export const getBookings = async (req: Request, res: Response) => {

@@ -69,26 +69,28 @@ export const createBooking = async (req: Request<{}, {}, BookingRequestBody>, re
 }
 
 export const updateBooking = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const data = req.body;
-  
-    try {
+  const { id_passport } = req.params;
+  const data = req.body;
+
+  try {
       const updatedBooking = await prismaClient.booking.update({
-        where: { id: +id },
-        data,
+          where: { id_passport: String(id_passport) },
+          data,
       });
       res.status(200).json(updatedBooking);
-    } catch (error) {
-        res.status(500).json({ error: 'Error to update the booking' });
-    }
-}
+  } catch (error) {
+      res.status(500).json({ error: 'Error to update the booking' });
+      console.error('Error:', error);
+  }
+};
+
 
 export const deleteBooking = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const id_passport = req.params;
   
     try {
       await prismaClient.booking.delete({
-        where: { id: +id },
+        where: { id_passport: String(id_passport) },
       });
 
       res.status(200).json({ message: 'Booking deleted successfully' });
